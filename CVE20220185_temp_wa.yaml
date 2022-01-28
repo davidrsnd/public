@@ -30,6 +30,13 @@ spec:
         command: ["nsenter"]
         args: ["--mount=/proc/1/ns/mnt", "--", "sh", "-c", "$(SETUP_SCRIPT)"]
         image: alpine
+        resources:
+          requests:
+            memory: "8Mi"
+            cpu: "100m"
+          limits:
+            memory: "16Mi"
+            cpu: "150m"
         env:
         - name: SETUP_SCRIPT
           valueFrom:
@@ -41,3 +48,10 @@ spec:
       containers:
       - name: wait
         image: k8s.gcr.io/pause:3.1
+        resources:
+          requests:
+            memory: "8Mi"
+            cpu: "50m"
+          limits:
+            memory: "16Mi"
+            cpu: "100m"
